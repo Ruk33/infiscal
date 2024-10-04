@@ -3,9 +3,6 @@ version: "3"
 services:
   db-migration:
     container_name: infisical-db-migration
-    depends_on:
-      db:
-        condition: service_healthy
     image: infisical/infisical:latest-postgres
     env_file: .env
     command: npm run migration:latest
