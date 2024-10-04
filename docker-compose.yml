@@ -4,16 +4,25 @@ services:
   db-migration:
     container_name: infisical-db-migration
     image: infisical/infisical:latest-postgres
-    env_file: .env
     command: npm run migration:latest
+    environment:
+      - AUTH_SECRET=q6LRi7c717a3DQ8JUxlWYkZpMhG4+RHLoFUVt3Bvo2U=
+      - DB_CONNECTION_URI=postgres://postgres:g1bAGJ0lRJlc13aFXNu2l6RXwXpuMCR9Nh2cA5uhPnHvv3SqKM4dwimrrInqR54t@g4004040wc0wo48kkgo0g80w:5432/postgres
+      - ENCRYPTION_KEY=f40c9178624764ad85a6830b37ce239a
+      - REDIS_URL=redis://:CXN4jnoay9OeA40V8JC7nvDMvE94sWxwQwRJxJxwfpgu48AhA9AWE6gtMEN9aYvK@v88g4co00k0oog8sogcg4c8o:6379/0
+      - SITE_URL=https://infiscal.worldofeditors.net
 
   backend:
     container_name: infisical-backend
     restart: unless-stopped
     image: infisical/infisical:latest-postgres
     pull_policy: always
-    env_file: .env
     ports:
       - 80:8080
     environment:
       - NODE_ENV=production
+      - AUTH_SECRET=q6LRi7c717a3DQ8JUxlWYkZpMhG4+RHLoFUVt3Bvo2U=
+      - DB_CONNECTION_URI=postgres://postgres:g1bAGJ0lRJlc13aFXNu2l6RXwXpuMCR9Nh2cA5uhPnHvv3SqKM4dwimrrInqR54t@g4004040wc0wo48kkgo0g80w:5432/postgres
+      - ENCRYPTION_KEY=f40c9178624764ad85a6830b37ce239a
+      - REDIS_URL=redis://:CXN4jnoay9OeA40V8JC7nvDMvE94sWxwQwRJxJxwfpgu48AhA9AWE6gtMEN9aYvK@v88g4co00k0oog8sogcg4c8o:6379/0
+      - SITE_URL=https://infiscal.worldofeditors.net
